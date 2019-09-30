@@ -19,3 +19,30 @@ function handleSignIn() {
     // ...
   });
 }
+
+function addMessage(postTitle, postBody) {
+  var postData = {
+    title: postTitle,
+    body: postBody
+  }
+
+  // Get a reference to the database service
+  var database = firebase.database().ref("posts");
+
+  // Create a new post reference with an auto-generated id
+  var newPostRef = database.push();
+  newPostRef.set(postData, function(error) {
+    if (error) {
+      // The write failed...
+    } else {
+      // Data saved successfully!
+      window.location.reload();
+    }
+  });
+}
+
+function handleMessageFormSubmit() {
+  var postTitle = $("#post-title").val();
+  var postBody = $("#post-body").val();
+  addMessage(postTitle, postBody);
+}

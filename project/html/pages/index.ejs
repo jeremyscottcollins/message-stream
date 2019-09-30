@@ -12,11 +12,15 @@
     <h1>My Web App</h1>
   </div>
 
-  <p>Click on the button for a surprise.</p>
-
   <button onClick="handleSignIn()" class="btn btn-dark">Login</button>
 
-  <div id="image"></div>
+  <form onSubmit="handleMessageFormSubmit()" action="#">
+    Title:<br>
+    <input type="text" id="post-title"><br>
+    Message:<br>
+    <textarea id="post-body" cols="30" rows="10"></textarea><br>
+    <button>Submit</button>
+  </form>
   
 </body>
 
