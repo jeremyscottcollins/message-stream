@@ -1,3 +1,7 @@
+$(document).ready(function() {
+  getPosts();
+})
+
 function handleSignIn() {
   var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -45,4 +49,16 @@ function handleMessageFormSubmit() {
   var postTitle = $("#post-title").val();
   var postBody = $("#post-body").val();
   addMessage(postTitle, postBody);
+}
+
+function getPosts() {
+  return firebase.database().ref("posts").once('value').then(function(snapshot) {
+    var posts = snapshot.val();
+    console.log(posts);
+    
+    for(var postKey in posts) {
+      var post = posts[postKey]
+      $("#post-listing").append("<div>" + post.title + " - " + post.body + "</div>");
+    }
+  });
 }
